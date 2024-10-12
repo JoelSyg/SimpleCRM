@@ -1,54 +1,53 @@
 <div class="dialog-container">
   <h2 mat-dialog-title>Add User</h2>
-  <div>
-    <mat-form-field class="mr-16" appearance="outline">
-      <mat-label>First Name</mat-label>
-      <input matInput />
-    </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label> Last Name</mat-label>
-      <input matInput />
-    </mat-form-field>
-  </div>
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div>
+      <mat-form-field class="mr-16" appearance="outline">
+        <mat-label>First Name</mat-label>
+        <input matInput formControlName="firstName" />
+      </mat-form-field>
 
-  <div>
-    <mat-form-field class="full-width">
-      <mat-label>Birth Date</mat-label>
-      <input matInput [matDatepicker]="picker" />
-      <mat-datepicker-toggle
-        matIconSuffix
-        [for]="picker"
-      ></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-  </div>
+      <mat-form-field appearance="outline">
+        <mat-label>Last Name</mat-label>
+        <input matInput formControlName="lastName" />
+      </mat-form-field>
+    </div>
 
-  <div>
-    <mat-form-field class="full-width" appearance="outline">
-      <mat-label>Street + House No.</mat-label>
-      <input matInput />
-    </mat-form-field>
-  </div>
+    <div>
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Birth Date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="birthDate" />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
 
-  <div>
-    <mat-form-field class="mr-16" appearance="outline">
-      <mat-label>Zipcode</mat-label>
-      <input matInput />
-    </mat-form-field>
+    <div>
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Street + House No.</mat-label>
+        <input matInput formControlName="street" />
+      </mat-form-field>
+    </div>
 
-    <mat-form-field appearance="outline">
-      <mat-label>City</mat-label>
-      <input matInput />
-    </mat-form-field>
-  </div>
+    <div>
+      <mat-form-field class="mr-16" appearance="outline">
+        <mat-label>Zipcode</mat-label>
+        <input matInput formControlName="zipCode" />
+      </mat-form-field>
 
-  <mat-dialog-actions>
-            
-    
-            <button mat-button>Cancel</button>
-    <button mat-button 
-    cdkFocusInitial>Save</button>
-  </mat-dialog-actions
-  >
+      <mat-form-field appearance="outline">
+        <mat-label>City</mat-label>
+        <input matInput formControlName="city" />
+      </mat-form-field>
+    </div>
+
+    <mat-dialog-actions>
+      <button mat-button type="button" mat-dialog-close>Cancel</button>
+      <button mat-button type="submit">Save</button>
+    </mat-dialog-actions>
+  </form>
 </div>
