@@ -4,6 +4,7 @@ import { User } from '../models/user.class';
 import { SharedMaterialModule } from '../shared-material.module';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogRef } from '@angular/material/dialog';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-dialog-add-user',
@@ -19,7 +20,10 @@ export class DialogAddUserComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<DialogAddUserComponent>,
+    private userService: UserService,
   ) {}
+
+  isSubmitting = false;
 
   ngOnInit(): void {
     this.userForm = this.fb.group({
@@ -36,12 +40,46 @@ export class DialogAddUserComponent implements OnInit {
     if (this.userForm.invalid) {
       this.userForm.markAllAsTouched();
       return;
-    } else if (this.userForm.valid) {
-      const formValues = this.userForm.value;
-      const newUser = new User(formValues);
-      console.log(newUser);
-      this.dialogRef.close();
     }
+
+    this.isSubmitting = true;
+    this.setFormDisabledState(true);
+
+    const formValues = this.userForm.value;
+    const newUser = new User(formValues);
+    const userId = this.generateUserId();
+
+    setTimeout(() => {
+      this.userService
+        .addUser(newUser, userId)
+        .then(() => {
+          console.log('Benutzer erfolgreich in Firebase gespeichert');
+          this.dialogRef.close();
+        })
+        .catch((error) => {
+          console.error(
+            'Fehler beim Speichern des Benutzers in Firebase: ',
+            error,
+          );
+        })
+        .finally(() => {
+          this.isSubmitting = false;
+          this.setFormDisabledState(false);
+        });
+    }, 500);
+  }
+
+  // TypeScript
+  setFormDisabledState(isDisabled: boolean) {
+    if (isDisabled) {
+      this.userForm.disable();
+    } else {
+      this.userForm.enable();
+    }
+  }
+
+  generateUserId(): string {
+    return Math.random().toString(36).substr(2, 9);
   }
 
   get lastName() {
