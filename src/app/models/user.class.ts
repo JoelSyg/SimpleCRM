@@ -1,4 +1,5 @@
 interface IUser {
+  id: string;
   firstName: string;
   lastName: string;
   birthDate: Date;
@@ -8,6 +9,7 @@ interface IUser {
 }
 
 export class User {
+  id: string;
   firstName: string;
   lastName: string;
   birthDate: Date;
@@ -16,6 +18,7 @@ export class User {
   city: string;
 
   constructor(obj?: Partial<IUser>) {
+    this.id = obj?.id || '';
     this.firstName = obj?.firstName ?? '';
     this.lastName = obj?.lastName ?? '';
     this.birthDate = obj?.birthDate ?? new Date();

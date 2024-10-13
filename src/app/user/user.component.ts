@@ -5,11 +5,12 @@ import { SharedMaterialModule } from '../shared-material.module';
 
 import { User } from '../models/user.class';
 import { UserService } from '../services/user.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [SharedMaterialModule],
+  imports: [SharedMaterialModule, RouterModule],
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss'],
 })
