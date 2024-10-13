@@ -3,3 +3,30 @@
   right: 56px;
   bottom: 56px;
 }
+
+mat-card-content {
+  padding: 0 !important;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  text-align: center;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+th {
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.4);
+  background-color: #f5f5f5;
+}
+
+.tr-user:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+}

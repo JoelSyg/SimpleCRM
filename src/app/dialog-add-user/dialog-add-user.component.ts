@@ -4,7 +4,7 @@ import { User } from '../models/user.class';
 import { SharedMaterialModule } from '../shared-material.module';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogRef } from '@angular/material/dialog';
-import { UserService } from '../user.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-dialog-add-user',
@@ -54,7 +54,7 @@ export class DialogAddUserComponent implements OnInit {
         .addUser(newUser, userId)
         .then(() => {
           console.log('Benutzer erfolgreich in Firebase gespeichert');
-          this.dialogRef.close();
+          this.dialogRef.close(true);
         })
         .catch((error) => {
           console.error(
@@ -69,7 +69,6 @@ export class DialogAddUserComponent implements OnInit {
     }, 500);
   }
 
-  // TypeScript
   setFormDisabledState(isDisabled: boolean) {
     if (isDisabled) {
       this.userForm.disable();

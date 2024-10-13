@@ -1,3 +1,28 @@
+<mat-list-item role="listitem"
+  ><mat-card appearance="outlined">
+    <mat-card-content>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Zipcode</th>
+          <th>City</th>
+        </tr>
+        @for (user of users; track users) {
+          <tr class="tr-user">
+            <td>{{ user.firstName }} {{ user.lastName }}</td>
+            <td>{{ user.zipCode }}</td>
+            <td>{{ user.city }}</td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="3">No users found</td>
+          </tr>
+        }
+      </table>
+    </mat-card-content>
+  </mat-card></mat-list-item
+>
+
 <button
   (click)="openDialog()"
   class="add-user-btn"
