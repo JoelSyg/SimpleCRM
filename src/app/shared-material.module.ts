@@ -13,6 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   imports: [
@@ -30,6 +31,7 @@ import { MatCardModule } from '@angular/material/card';
     CommonModule,
     MatProgressBarModule,
     MatCardModule,
+    MatMenuModule,
   ],
   exports: [
     MatToolbarModule,
@@ -46,6 +48,7 @@ import { MatCardModule } from '@angular/material/card';
     CommonModule,
     MatProgressBarModule,
     MatCardModule,
+    MatMenuModule,
   ],
 })
 export class SharedMaterialModule {}

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Database, ref, get, set } from '@angular/fire/database';
+import { Database, ref, get, set, push } from '@angular/fire/database';
 import { User } from '../models/user.class';
 
 @Injectable({
@@ -10,9 +10,11 @@ export class UserService {
 
   constructor(private db: Database) {}
 
-  addUser(user: User, userId: string): Promise<void> {
-    const userRef = ref(this.db, `${this.dbPath}/${userId}`);
-    return set(userRef, { ...user });
+  addUser(user: User): Promise<void> {
+    const userRef = ref(this.db, this.dbPath);
+    const newUserRef = push(userRef);
+    const { id, ...userDataWithoutId } = user;
+    return set(newUserRef, { ...userDataWithoutId });
   }
 
   async getUsers(): Promise<User[]> {
@@ -27,5 +29,16 @@ export class UserService {
     } else {
       return [];
     }
+  }
+
+  getUserById(id: string): Promise<User> {
+    const userRef = ref(this.db, `users/${id}`);
+    return get(userRef).then((snapshot) => {
+      if (snapshot.exists()) {
+        return snapshot.val();
+      } else {
+        throw new Error('Benutzer nicht gefunden');
+      }
+    });
   }
 }

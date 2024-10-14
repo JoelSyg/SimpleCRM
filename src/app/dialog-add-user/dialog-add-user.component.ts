@@ -16,14 +16,13 @@ import { UserService } from '../services/user.service';
 })
 export class DialogAddUserComponent implements OnInit {
   userForm!: FormGroup;
+  isSubmitting = false;
 
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<DialogAddUserComponent>,
     private userService: UserService,
   ) {}
-
-  isSubmitting = false;
 
   ngOnInit(): void {
     this.userForm = this.fb.group({
@@ -47,11 +46,10 @@ export class DialogAddUserComponent implements OnInit {
 
     const formValues = this.userForm.value;
     const newUser = new User(formValues);
-    const userId = this.generateUserId();
 
     setTimeout(() => {
       this.userService
-        .addUser(newUser, userId)
+        .addUser(newUser)
         .then(() => {
           console.log('Benutzer erfolgreich in Firebase gespeichert');
           this.dialogRef.close(true);
@@ -75,10 +73,6 @@ export class DialogAddUserComponent implements OnInit {
     } else {
       this.userForm.enable();
     }
-  }
-
-  generateUserId(): string {
-    return Math.random().toString(36).substr(2, 9);
   }
 
   get lastName() {

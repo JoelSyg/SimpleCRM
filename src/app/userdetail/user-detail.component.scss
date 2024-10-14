@@ -1,0 +1,45 @@
+.user-detail-header {
+  background-color: darkorange;
+  min-height: 250px;
+  display: flex;
+  color: white;
+  align-items: flex-end;
+  border-radius: 3px;
+  padding: 20px;
+
+  div {
+    display: flex;
+    align-items: start;
+    gap: 4px;
+    flex-direction: column;
+    margin-left: 28px;
+    justify-content: center;
+    height: 120px;
+
+    h2 {
+      margin: 0;
+    }
+  }
+
+  img {
+    height: 120px;
+    width: 120px;
+  }
+}
+
+.user-detail-content-wrapper {
+  margin-top: 32px;
+  .user-detail-content {
+    padding: 20px;
+
+    h2 {
+      margin-bottom: 4px;
+    }
+  }
+}
+
+.more-icon {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+}
