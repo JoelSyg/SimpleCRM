@@ -9,7 +9,7 @@ import { UserService } from '../services/user.service';
 @Component({
   selector: 'app-dialog-add-user',
   templateUrl: './dialog-add-user.component.html',
-  styleUrl: './dialog-add-user.component.scss',
+  styleUrls: ['./dialog-add-user.component.scss'],
   imports: [SharedMaterialModule, MatDatepickerModule],
   providers: [MatDatepickerModule],
   standalone: true,
@@ -28,7 +28,9 @@ export class DialogAddUserComponent implements OnInit {
     this.userForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      birthDate: ['', Validators.required],
+      birthDate: [''],
+      email: ['', [Validators.required, Validators.email]],
+      phone: [''],
       street: ['', Validators.required],
       zipCode: ['', Validators.required],
       city: ['', Validators.required],
@@ -51,14 +53,11 @@ export class DialogAddUserComponent implements OnInit {
       this.userService
         .addUser(newUser)
         .then(() => {
-          console.log('Benutzer erfolgreich in Firebase gespeichert');
+          console.log('User successfully saved to Firebase');
           this.dialogRef.close(true);
         })
         .catch((error) => {
-          console.error(
-            'Fehler beim Speichern des Benutzers in Firebase: ',
-            error,
-          );
+          console.error('Error saving user to Firebase: ', error);
         })
         .finally(() => {
           this.isSubmitting = false;

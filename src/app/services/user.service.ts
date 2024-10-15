@@ -13,8 +13,7 @@ export class UserService {
   addUser(user: User): Promise<void> {
     const userRef = ref(this.db, this.dbPath);
     const newUserRef = push(userRef);
-    const { id, ...userDataWithoutId } = user;
-    return set(newUserRef, { ...userDataWithoutId });
+    return set(newUserRef, user.toFirebaseObject());
   }
 
   async getUsers(): Promise<User[]> {
@@ -22,10 +21,9 @@ export class UserService {
     const snapshot = await get(dbRef);
     if (snapshot.exists()) {
       const users = snapshot.val();
-      return Object.keys(users).map((key) => ({
-        id: key,
-        ...users[key],
-      }));
+      return Object.keys(users).map((key) =>
+        User.fromFirebaseObject({ id: key, ...users[key] }),
+      );
     } else {
       return [];
     }
@@ -35,20 +33,16 @@ export class UserService {
     const userRef = ref(this.db, `users/${id}`);
     return get(userRef).then((snapshot) => {
       if (snapshot.exists()) {
-        return { id, ...snapshot.val() };
+        return User.fromFirebaseObject({ id, ...snapshot.val() });
       } else {
-        throw new Error('Benutzer nicht gefunden');
+        throw new Error('User not found');
       }
     });
   }
 
   updateUser(user: User): Promise<void> {
     const userRef = ref(this.db, `users/${user.id}`);
-    if (!user.id) {
-      throw new Error('Benutzer hat keine gültige ID');
-    }
-    const userDataWithoutId = { ...user };
-    delete userDataWithoutId.id;
+    const { id, ...userDataWithoutId } = user;
     return update(userRef, userDataWithoutId);
   }
 }
