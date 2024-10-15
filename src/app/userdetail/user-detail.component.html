@@ -9,16 +9,19 @@
         </h2>
         <span>emailsssat.com</span>
       </div>
-      <button class="more-icon" mat-icon-button [matMenuTriggerFor]="menu">
+      <button
+        class="more-icon"
+        mat-icon-button
+        [matMenuTriggerFor]="headerMenu"
+      >
         <mat-icon>more_vert</mat-icon>
       </button>
-      <mat-menu #menu="matMenu" xPosition="before">
-        <button mat-menu-item>
-          <span>edit</span>
-        </button>
+      <mat-menu #headerMenu="matMenu" xPosition="before">
+        <button (click)="openEditUserDialog()" mat-menu-item>edit</button>
       </mat-menu>
     </mat-card-header>
   </mat-card>
+
   <mat-card class="user-detail-content-wrapper">
     <mat-card-content class="user-detail-content">
       <h2>Address</h2>
@@ -28,13 +31,15 @@
         {{ user.city }}
       </span>
 
-      <button class="more-icon" mat-icon-button [matMenuTriggerFor]="menu">
+      <button
+        class="more-icon"
+        mat-icon-button
+        [matMenuTriggerFor]="contentMenu"
+      >
         <mat-icon>more_vert</mat-icon>
       </button>
-      <mat-menu #menu="matMenu" xPosition="before">
-        <button (click)="openEditMenu()" mat-menu-item>
-          <span>edit</span>
-        </button>
+      <mat-menu #contentMenu="matMenu" xPosition="before">
+        <button (click)="openEditAddressDialog()" mat-menu-item>edit</button>
       </mat-menu>
     </mat-card-content>
   </mat-card>

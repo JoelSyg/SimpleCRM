@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Database, ref, get, set, push } from '@angular/fire/database';
+import { Database, ref, get, set, push, update } from '@angular/fire/database';
 import { User } from '../models/user.class';
 
 @Injectable({
@@ -35,10 +35,20 @@ export class UserService {
     const userRef = ref(this.db, `users/${id}`);
     return get(userRef).then((snapshot) => {
       if (snapshot.exists()) {
-        return snapshot.val();
+        return { id, ...snapshot.val() };
       } else {
         throw new Error('Benutzer nicht gefunden');
       }
     });
+  }
+
+  updateUser(user: User): Promise<void> {
+    const userRef = ref(this.db, `users/${user.id}`);
+    if (!user.id) {
+      throw new Error('Benutzer hat keine gültige ID');
+    }
+    const userDataWithoutId = { ...user };
+    delete userDataWithoutId.id;
+    return update(userRef, userDataWithoutId);
   }
 }
