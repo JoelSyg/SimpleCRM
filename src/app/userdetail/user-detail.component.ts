@@ -6,6 +6,7 @@ import { SharedMaterialModule } from '../shared-material.module';
 import { DialogEditAddressComponent } from '../dialog-edit-address/dialog-edit-address.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogEditUserComponent } from '../dialog-edit-user/dialog-edit-user.component';
+import { DialogEditContactComponent } from '../dialog-edit-contact/dialog-edit-contact.component';
 
 @Component({
   selector: 'app-user-detail',
@@ -53,6 +54,21 @@ export class UserdetailComponent implements OnInit {
     if (this.user) {
       this.dialog
         .open(DialogEditAddressComponent, {
+          data: { user: this.user },
+        })
+        .afterClosed()
+        .subscribe((result) => {
+          if (result) {
+            this.loadUser();
+          }
+        });
+    }
+  }
+
+  openEditContactDialog() {
+    if (this.user) {
+      this.dialog
+        .open(DialogEditContactComponent, {
           data: { user: this.user },
         })
         .afterClosed()

@@ -1,6 +1,6 @@
 <div class="dialog-container">
   <mat-progress-bar
-  [ngClass]="{ 'd-none': !isSubmitting }"
+    [ngClass]="{ 'd-none': !isSubmitting }"
     mode="indeterminate"
   ></mat-progress-bar>
 
@@ -16,6 +16,18 @@
       <mat-form-field appearance="outline">
         <mat-label>Last Name</mat-label>
         <input matInput formControlName="lastName" />
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field class="full-width" appearance="outline">
+        <mat-label>Birth Date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="birthDate" />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
     </div>
 

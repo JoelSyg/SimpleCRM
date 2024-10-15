@@ -1,0 +1,28 @@
+<div class="dialog-container">
+  <mat-progress-bar
+    [ngClass]="{ 'd-none': !isSubmitting }"
+    mode="indeterminate"
+  ></mat-progress-bar>
+
+  <h2 mat-dialog-title>Edit Contact</h2>
+
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div>
+      <div>
+        <mat-form-field class="mr-16" appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Phone Number</mat-label>
+          <input matInput formControlName="phone" />
+        </mat-form-field>
+      </div>
+      <mat-dialog-actions>
+        <button mat-button type="button" mat-dialog-close>Cancel</button>
+        <button mat-button type="submit" [disabled]="isSubmitting">Save</button>
+      </mat-dialog-actions>
+    </div>
+  </form>
+</div>

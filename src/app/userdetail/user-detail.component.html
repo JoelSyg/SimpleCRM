@@ -6,9 +6,8 @@
         <h2>
           {{ user.firstName }}
           {{ user.lastName }}
-          <!-- {{ user.birthDate | date: 'dd/MM/yyyy' }} -->
         </h2>
-        <span>emailsssat.com</span>
+        <span>Born on: {{ user.birthDate | date: "dd/MM/yyyy" }}</span>
       </div>
       <button
         class="more-icon"
@@ -35,12 +34,34 @@
       <button
         class="more-icon"
         mat-icon-button
-        [matMenuTriggerFor]="contentMenu"
+        [matMenuTriggerFor]="adressMenu"
       >
         <mat-icon>more_vert</mat-icon>
       </button>
-      <mat-menu #contentMenu="matMenu" xPosition="before">
+      <mat-menu #adressMenu="matMenu" xPosition="before">
         <button (click)="openEditAddressDialog()" mat-menu-item>edit</button>
+      </mat-menu>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="user-detail-content-wrapper">
+    <mat-card-content class="user-detail-content">
+        <h2>Contact</h2>
+        <span>
+          {{ user.email }} <br />
+          {{ user.phone ? user.phone : 'No phone number available.' }} <br />
+        </span>
+      
+
+      <button
+        class="more-icon"
+        mat-icon-button
+        [matMenuTriggerFor]="contactMenu"
+      >
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #contactMenu="matMenu" xPosition="before">
+        <button (click)="openEditContactDialog()" mat-menu-item>edit</button>
       </mat-menu>
     </mat-card-content>
   </mat-card>

@@ -6,28 +6,27 @@ import { User } from '../models/user.class';
 import { SharedMaterialModule } from '../shared-material.module';
 
 @Component({
-  selector: 'app-dialog-edit-address',
-  templateUrl: './dialog-edit-address.component.html',
-  styleUrls: ['./dialog-edit-address.component.scss'],
+  selector: 'app-dialog-edit-contact',
+  templateUrl: './dialog-edit-contact.component.html',
+  styleUrls: ['./dialog-edit-contact.component.scss'],
   standalone: true,
   imports: [SharedMaterialModule],
 })
-export class DialogEditAddressComponent implements OnInit {
+export class DialogEditContactComponent implements OnInit {
   userForm!: FormGroup;
   isSubmitting = false;
 
   constructor(
     private fb: FormBuilder,
-    private dialogRef: MatDialogRef<DialogEditAddressComponent>,
+    private dialogRef: MatDialogRef<DialogEditContactComponent>,
     private userService: UserService,
     @Inject(MAT_DIALOG_DATA) public data: { user: User },
   ) {}
 
   ngOnInit(): void {
     this.userForm = this.fb.group({
-      street: [this.data.user.street, Validators.required],
-      zipCode: [this.data.user.zipCode, Validators.required],
-      city: [this.data.user.city, Validators.required],
+      email: [this.data.user.email, [Validators.required, Validators.email]],
+      phone: [this.data.user.phone],
     });
   }
 
@@ -39,22 +38,21 @@ export class DialogEditAddressComponent implements OnInit {
 
     this.isSubmitting = true;
     this.setFormDisabledState(true);
-    
+
     const updatedFields = {
-      street: this.userForm.value.street,
-      zipCode: this.userForm.value.zipCode,
-      city: this.userForm.value.city,
+      email: this.userForm.value.email,
+      phone: this.userForm.value.phone,
     };
 
     setTimeout(() => {
       this.userService
         .updateUserFields(this.data.user.id!, updatedFields)
         .then(() => {
-          console.log('Adresse erfolgreich aktualisiert');
+          console.log('Contact info updated successfully');
           this.dialogRef.close(true);
         })
         .catch((error) => {
-          console.error('Fehler beim Aktualisieren der Adresse:', error);
+          console.error('Error updating contact info:', error);
         })
         .finally(() => {
           this.isSubmitting = false;

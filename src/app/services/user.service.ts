@@ -40,9 +40,11 @@ export class UserService {
     });
   }
 
-  updateUser(user: User): Promise<void> {
-    const userRef = ref(this.db, `users/${user.id}`);
-    const { id, ...userDataWithoutId } = user;
-    return update(userRef, userDataWithoutId);
+  updateUserFields(
+    userId: string,
+    updatedFields: Partial<User>,
+  ): Promise<void> {
+    const userRef = ref(this.db, `users/${userId}`);
+    return update(userRef, updatedFields);
   }
 }
