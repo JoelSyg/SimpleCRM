@@ -7,7 +7,9 @@
           {{ user.firstName }}
           {{ user.lastName }}
         </h2>
-        <span>Born on: {{ user.birthDate | date: "dd/MM/yyyy" }}</span>
+        @if (user.birthDate) {
+          <span>Born on: {{ user.birthDate | date: "dd.MM.yyyy" }}</span>
+        }
       </div>
       <button
         class="more-icon"
@@ -46,12 +48,11 @@
 
   <mat-card class="user-detail-content-wrapper">
     <mat-card-content class="user-detail-content">
-        <h2>Contact</h2>
-        <span>
-          {{ user.email }} <br />
-          {{ user.phone ? user.phone : 'No phone number available.' }} <br />
-        </span>
-      
+      <h2>Contact</h2>
+      <span>
+        {{ user.email }} <br />
+        {{ user.phone ? user.phone : "No phone number available." }} <br />
+      </span>
 
       <button
         class="more-icon"
