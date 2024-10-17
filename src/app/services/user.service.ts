@@ -29,7 +29,7 @@ export class UserService {
     }
   }
 
-  getUserById(id: string): Promise<User> {
+  async getUserById(id: string): Promise<User> {
     const userRef = ref(this.db, `users/${id}`);
     return get(userRef).then((snapshot) => {
       if (snapshot.exists()) {

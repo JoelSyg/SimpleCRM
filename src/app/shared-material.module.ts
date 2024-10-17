@@ -48,7 +48,7 @@ import { MatMenuModule } from '@angular/material/menu';
     CommonModule,
     MatProgressBarModule,
     MatCardModule,
-    MatMenuModule,
+    MatMenuModule
   ],
 })
 export class SharedMaterialModule {}

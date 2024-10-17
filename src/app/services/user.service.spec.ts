@@ -1,16 +1,12 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { UserComponent } from './user.component';
-import { SharedMaterialModule } from '../shared-material.module';
-import { UserService } from '../services/user.service'; // UserService importieren
+import { TestBed } from '@angular/core/testing';
+import { UserService } from './user.service';
 import { Database } from '@angular/fire/database'; // Firebase Database importieren
 
-describe('UserComponent', () => {
-  let component: UserComponent;
-  let fixture: ComponentFixture<UserComponent>;
+describe('UserService', () => {
+  let service: UserService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UserComponent, SharedMaterialModule],
       providers: [
         {
           provide: Database, 
@@ -27,12 +23,10 @@ describe('UserComponent', () => {
       ]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(UserComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    service = TestBed.inject(UserService);
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should be created', () => {
+    expect(service).toBeTruthy();
   });
 });
