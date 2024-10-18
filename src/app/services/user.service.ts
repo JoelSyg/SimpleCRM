@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Database, ref, get, set, push, update } from '@angular/fire/database';
+import { Database, ref, get, set, push, update, remove } from '@angular/fire/database';
 import { User } from '../models/user.class';
 
 @Injectable({
@@ -46,5 +46,10 @@ export class UserService {
   ): Promise<void> {
     const userRef = ref(this.db, `users/${userId}`);
     return update(userRef, updatedFields);
+  }
+
+  deleteUser(userId: string): Promise<void> {
+    const userRef = ref(this.db, `users/${userId}`);
+    return remove(userRef);
   }
 }

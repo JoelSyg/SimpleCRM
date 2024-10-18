@@ -1,3 +1,7 @@
+.container {
+  position: relative;
+}
+
 .user-detail-header {
   background-color: darkorange;
   min-height: 250px;
@@ -42,4 +46,10 @@
   position: absolute;
   top: 4px;
   right: 4px;
+}
+
+.delete-btn {
+  position: absolute;
+  right: 0;
+  margin-top: 32px;
 }

@@ -7,6 +7,7 @@ import { DialogEditAddressComponent } from '../dialog-edit-address/dialog-edit-a
 import { MatDialog } from '@angular/material/dialog';
 import { DialogEditUserComponent } from '../dialog-edit-user/dialog-edit-user.component';
 import { DialogEditContactComponent } from '../dialog-edit-contact/dialog-edit-contact.component';
+import { DialogDeleteConfirmComponent } from '../dialog-delete-confirm/dialog-delete-confirm.component';
 
 @Component({
   selector: 'app-user-detail',
@@ -77,6 +78,15 @@ export class UserdetailComponent implements OnInit {
             this.loadUser();
           }
         });
+    }
+  }
+
+  openDeleteConfirmDialog() {
+    if (this.user) {
+      this.dialog
+        .open(DialogDeleteConfirmComponent, {
+          data: { user: this.user },
+        })
     }
   }
 

@@ -1,0 +1,22 @@
+.dialog-container {
+  padding: 24px;
+  position: relative;
+  text-align: center;
+}
+
+.progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+mat-dialog-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+button[mat-button] {
+  min-width: 100px;
+}

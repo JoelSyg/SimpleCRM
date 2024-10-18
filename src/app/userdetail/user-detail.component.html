@@ -1,3 +1,4 @@
+<div class="container">
 @if (user) {
   <mat-card appearance="outlined">
     <mat-card-header class="user-detail-header">
@@ -66,6 +67,10 @@
       </mat-menu>
     </mat-card-content>
   </mat-card>
+  <button class="delete-btn" color="warn" (click)="openDeleteConfirmDialog()" mat-raised-button>Delete User</button>
+  
 } @else {
   <p>No user details available.</p>
 }
+
+</div>
