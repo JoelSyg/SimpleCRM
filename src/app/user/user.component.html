@@ -1,6 +1,12 @@
 <div class="container">
   <mat-form-field class="search-field">
-    <input matInput type="search" placeholder="Search" [(ngModel)]="searchTerm" (input)="filterUsers()">
+    <input
+      matInput
+      type="search"
+      placeholder="Search"
+      [(ngModel)]="searchTerm"
+      (input)="filterUsers()"
+    />
     <button matSuffix mat-icon-button>
       <mat-icon>search</mat-icon>
     </button>
@@ -16,7 +22,7 @@
             <th>CITY</th>
             <th>CREATED</th>
           </tr>
-          @for (user of filteredUsers; track user.id) {
+          @for (user of displayedUsers; track user.id) {
             <tr class="tr-user" [routerLink]="['/user', user.id]">
               <td>{{ user.firstName }} {{ user.lastName }}</td>
               <td>{{ user.zipCode }}</td>
@@ -33,7 +39,24 @@
     </mat-card>
   </mat-list-item>
 
-  <button (click)="openDialog()" class="add-user-btn" mat-fab color="primary" matTooltip="Add user" [matTooltipPosition]="'above'">
+  @if (loadedCount < filteredUsers.length) {
+    <button
+      (click)="loadMoreUsers()"
+      class="load-more-btn"
+      mat-stroked-button
+      color="primary"
+    >
+      Load More
+    </button>
+  }
+  <button
+    (click)="openDialog()"
+    class="add-user-btn"
+    mat-fab
+    color="primary"
+    matTooltip="Add user"
+    [matTooltipPosition]="'above'"
+  >
     <mat-icon>add</mat-icon>
   </button>
 </div>

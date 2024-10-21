@@ -3,11 +3,12 @@
   flex-direction: column;
   height: 100%;
   box-sizing: border-box;
-  padding-bottom: 42px;
+  padding-bottom: 16px;
 }
 
 .search-field {
-  align-self: flex-end;
+  align-self: end;
+  border-radius: 3px;
 }
 
 table {
@@ -19,15 +20,16 @@ table {
 
 .add-user-btn {
   position: fixed;
-  right: 56px;
-  bottom: 56px;
+  right: 38px;
+  bottom: 38px;
 }
 
 mat-card-content {
   padding: 0 !important;
 }
 
-th, td {
+th,
+td {
   text-align: center;
   padding: 10px;
   border-bottom: 1px solid #ccc;
@@ -42,4 +44,9 @@ th {
 .tr-user:hover {
   background-color: rgba(0, 0, 0, 0.05);
   cursor: pointer;
+}
+
+.load-more-btn {
+  align-self: center;
+  margin-top: 16px;
 }

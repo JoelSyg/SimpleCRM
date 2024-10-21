@@ -10,7 +10,12 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [SharedMaterialModule, RouterModule, ReactiveFormsModule, FormsModule],
+  imports: [
+    SharedMaterialModule,
+    RouterModule,
+    ReactiveFormsModule,
+    FormsModule,
+  ],
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss'],
 })
@@ -18,8 +23,15 @@ export class UserComponent implements OnInit {
   users: User[] = [];
   filteredUsers: User[] = [];
   searchTerm: string = '';
+  userCount: number = 0;
+  displayedUsers: User[] = [];
+  usersPerPage: number = 100;
+  loadedCount: number = 0;
 
-  constructor(public dialog: MatDialog, private userService: UserService) {}
+  constructor(
+    public dialog: MatDialog,
+    private userService: UserService,
+  ) {}
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogAddUserComponent);
@@ -38,20 +50,41 @@ export class UserComponent implements OnInit {
   private async loadUsers(): Promise<void> {
     try {
       const users = await this.userService.getUsers();
-      this.users = users.sort((a, b) => b.created!.getTime() - a.created!.getTime());
-      this.filteredUsers = users;
+      this.users = users.sort(
+        (a, b) => b.created!.getTime() - a.created!.getTime(),
+      );
+      this.filteredUsers = this.users;
+      this.loadMoreUsers();
     } catch (error) {
       console.error('Fehler beim Abrufen der Benutzer:', error);
     }
   }
 
+  loadMoreUsers(): void {
+    const remainingUsers = this.filteredUsers.slice(
+      this.loadedCount,
+      this.loadedCount + this.usersPerPage,
+    );
+    this.displayedUsers = [...this.displayedUsers, ...remainingUsers];
+    this.loadedCount += remainingUsers.length;
+  }
+
   filterUsers(): void {
     const searchLower = this.searchTerm.toLowerCase();
-    this.filteredUsers = this.users.filter(user =>
-      (user.firstName + ' ' + user.lastName).toLowerCase().includes(searchLower) ||
-      user.zipCode.toString().includes(searchLower) ||
-      user.city.toLowerCase().includes(searchLower)
+    this.filteredUsers = this.users.filter(
+      (user) =>
+        (user.firstName + ' ' + user.lastName)
+          .toLowerCase()
+          .includes(searchLower) ||
+        user.zipCode.toString().includes(searchLower) ||
+        user.city.toLowerCase().includes(searchLower),
     );
+    this.resetDisplayedUsers();
   }
-  
+
+  resetDisplayedUsers(): void {
+    this.displayedUsers = [];
+    this.loadedCount = 0;
+    this.loadMoreUsers();
+  }
 }
