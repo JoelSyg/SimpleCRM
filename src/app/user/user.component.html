@@ -1,35 +1,37 @@
-<mat-list-item role="listitem"
-  ><mat-card appearance="outlined">
-    <mat-card-content>
-      <table>
-        <tr>
-          <th>Name</th>
-          <th>Zipcode</th>
-          <th>City</th>
-        </tr>
-        @for (user of users; track users) {
-          <tr class="tr-user" [routerLink]="['/user', user.id]">
-            <td>{{ user.firstName }} {{ user.lastName }}</td>
-            <td>{{ user.zipCode }}</td>
-            <td>{{ user.city }}</td>
-          </tr>
-        } @empty {
-          <tr>
-            <td colspan="3">No users found</td>
-          </tr>
-        }
-      </table>
-    </mat-card-content>
-  </mat-card></mat-list-item
->
+<div class="container">
+  <mat-form-field class="search-field">
+    <input matInput type="search" placeholder="Search" [(ngModel)]="searchTerm" (input)="filterUsers()">
+    <button matSuffix mat-icon-button>
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-form-field>
 
-<button
-  (click)="openDialog()"
-  class="add-user-btn"
-  mat-fab
-  color="primary"
-  matTooltip="Add user"
-  [matTooltipPosition]="'above'"
->
-  <mat-icon>add</mat-icon>
-</button>
+  <mat-list-item role="listitem">
+    <mat-card appearance="outlined">
+      <mat-card-content>
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Zipcode</th>
+            <th>City</th>
+          </tr>
+          @for (user of filteredUsers; track user.id) {
+            <tr class="tr-user" [routerLink]="['/user', user.id]">
+              <td>{{ user.firstName }} {{ user.lastName }}</td>
+              <td>{{ user.zipCode }}</td>
+              <td>{{ user.city }}</td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="3">No users found</td>
+            </tr>
+          }
+        </table>
+      </mat-card-content>
+    </mat-card>
+  </mat-list-item>
+
+  <button (click)="openDialog()" class="add-user-btn" mat-fab color="primary" matTooltip="Add user" [matTooltipPosition]="'above'">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

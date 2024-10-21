@@ -1,5 +1,24 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
+  padding-bottom: 42px;
+}
+
+.search-field {
+  align-self: flex-end;
+}
+
+table {
+  width: 100%;
+  flex-grow: 1;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
 .add-user-btn {
-  position: absolute;
+  position: fixed;
   right: 56px;
   bottom: 56px;
 }
@@ -8,13 +27,7 @@ mat-card-content {
   padding: 0 !important;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-th,
-td {
+th, td {
   text-align: center;
   padding: 10px;
   border-bottom: 1px solid #ccc;
