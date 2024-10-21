@@ -10,6 +10,7 @@ export interface IUser {
   zipCode: number | string;
   city: string;
   phone?: string;
+  created: Date | null;
 }
 
 export class User implements IUser {
@@ -22,6 +23,7 @@ export class User implements IUser {
   zipCode: number | string;
   city: string;
   phone?: string;
+  created: Date | null;
 
   constructor(obj?: Partial<IUser>) {
     this.id = obj?.id;
@@ -33,6 +35,7 @@ export class User implements IUser {
     this.zipCode = obj?.zipCode ?? '';
     this.city = obj?.city ?? '';
     this.phone = obj?.phone ?? '';
+    this.created = obj?.created ?? new Date();
   }
 
   public toFirebaseObject(): any {
@@ -45,6 +48,7 @@ export class User implements IUser {
       zipCode: this.zipCode,
       city: this.city,
       phone: this.phone ?? null,
+      created: this.created ? Timestamp.fromDate(this.created) : null,
     };
   }
 
@@ -53,6 +57,9 @@ export class User implements IUser {
       ...obj,
       birthDate: obj.birthDate?.seconds
         ? new Date(obj.birthDate.seconds * 1000)
+        : undefined,
+      created: obj.created?.seconds
+        ? new Date(obj.created.seconds * 1000)
         : undefined,
     });
   }

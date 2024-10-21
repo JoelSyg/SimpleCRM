@@ -38,7 +38,7 @@ export class UserComponent implements OnInit {
   private async loadUsers(): Promise<void> {
     try {
       const users = await this.userService.getUsers();
-      this.users = users;
+      this.users = users.sort((a, b) => b.created!.getTime() - a.created!.getTime());
       this.filteredUsers = users;
     } catch (error) {
       console.error('Fehler beim Abrufen der Benutzer:', error);

@@ -11,19 +11,21 @@
       <mat-card-content>
         <table>
           <tr>
-            <th>Name</th>
-            <th>Zipcode</th>
-            <th>City</th>
+            <th>NAME</th>
+            <th>ZIPCODE</th>
+            <th>CITY</th>
+            <th>CREATED</th>
           </tr>
           @for (user of filteredUsers; track user.id) {
             <tr class="tr-user" [routerLink]="['/user', user.id]">
               <td>{{ user.firstName }} {{ user.lastName }}</td>
               <td>{{ user.zipCode }}</td>
               <td>{{ user.city }}</td>
+              <td>{{ user.created | date: "dd.MM.yyyy" }}</td>
             </tr>
           } @empty {
             <tr>
-              <td colspan="3">No users found</td>
+              <td colspan="4">No users found</td>
             </tr>
           }
         </table>
