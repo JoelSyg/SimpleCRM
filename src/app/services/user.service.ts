@@ -52,4 +52,15 @@ export class UserService {
     const userRef = ref(this.db, `users/${userId}`);
     return remove(userRef);
   }
+
+  async getUserCount(): Promise<number> {
+    const dbRef = ref(this.db, this.dbPath);
+    const snapshot = await get(dbRef);
+    if (snapshot.exists()) {
+      const users = snapshot.val();
+      return Object.keys(users).length;
+    } else {
+      return 0;
+    }
+  }
 }

@@ -1,0 +1,38 @@
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px;
+  }
+  
+  .user-count-card {
+    width: 500px;
+    height: 250px;
+    padding: 24px;
+    text-align: center;
+    background-color: #f1f1f1;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+  }
+  
+  mat-card-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  h1 {
+    font-size: 64px;
+    margin: 32px 0;
+  }
+  
+  .date-display {
+    margin-top: 16px;
+    font-size: 18px;
+    color: #555;
+  }
+  
+  .date-display p {
+    margin: 0;
+  }
+  
